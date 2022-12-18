@@ -1,8 +1,9 @@
 package net.minecraft.client.entity;
 
 import me.dev.clientbase.Client;
-import me.dev.clientbase.hackapi.ModuleManager;
-import me.dev.clientbase.hackapi.event.theevents.EventMotionUpdate;
+import me.dev.clientbase.api.module.manager.ModuleManager;
+import me.dev.clientbase.api.module.Module;
+import me.dev.clientbase.impl.event.EventMotionUpdate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -194,7 +195,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
     	
     	final EventMotionUpdate move = new EventMotionUpdate(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.rotationYaw, this.rotationPitch, this.onGround);
     	
-    	for(me.dev.clientbase.hackapi.Module module : Client.CLIENT.getSingleton().getModules().values()) {
+    	for(me.dev.clientbase.api.module.Module module : Client.CLIENT.moduleManager.getElements().values()) {
     		
     		if(module.preMotionAction()!=null && module.isToggled()) module.preMotionAction().accept(move);
     		
@@ -290,7 +291,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
             }
         }
         
-        for(me.dev.clientbase.hackapi.Module module : Client.CLIENT.getSingleton().getModules().values()) {
+        for(me.dev.clientbase.api.module.Module module : Client.CLIENT.moduleManager.getElements().values()) {
     		
     		if(module.postMotionAction()!=null && module.isToggled()) module.postMotionAction().accept(move);
     		
@@ -320,23 +321,10 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void sendChatMessage(String message)
     {
-    	if(message.toLowerCase().equals(".toggle criticals")) {
-    		
-    		ModuleManager.getInstance().getCriticals().toggle();
-    		
-    		return;
-    	}
-    	if(message.toLowerCase().equals(".toggle sprint")) {
-    		
-    		ModuleManager.getInstance().getSprint().toggle();
-    		
-    		return;
-    	}
-    	if(message.toLowerCase().equals(".toggle hud")) {
-    		
-    		ModuleManager.getInstance().getHUD().toggle();
-    		
-    		return;
+    	for(Module m : Client.CLIENT.moduleManager.getElements().values()) {
+    		if(message.equalsIgnoreCase(".toggle " + m.getName())) {
+    			m.toggle();
+    		}
     	}
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
     }

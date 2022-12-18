@@ -19,8 +19,8 @@ import com.google.common.base.Predicates;
 import com.google.gson.JsonSyntaxException;
 
 import me.dev.clientbase.Client;
-import me.dev.clientbase.hackapi.event.theevents.EventRender2D;
-import me.dev.clientbase.hackapi.event.theevents.EventRender3D;
+import me.dev.clientbase.impl.event.EventRender2D;
+import me.dev.clientbase.impl.event.EventRender3D;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -1188,7 +1188,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 this.renderEndNanoTime = System.nanoTime();
             }
 
-            for(me.dev.clientbase.hackapi.Module module : Client.theMapOfTheModulesThatWeUse.values()) {
+            for(me.dev.clientbase.api.module.Module module : Client.CLIENT.moduleManager.getElements().values()) {
             	if(module.render2dAction() != null && module.isToggled()) {
             		module.render2dAction().accept(new EventRender2D());
             	}
@@ -1491,7 +1491,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         this.mc.mcProfiler.endStartSection("hand");
         
-        for(me.dev.clientbase.hackapi.Module module : Client.theMapOfTheModulesThatWeUse.values()) {
+        for(me.dev.clientbase.api.module.Module module : Client.CLIENT.moduleManager.getElements().values()) {
         	if(module.render3DAction() != null && module.isToggled()) {
         		module.render3DAction().accept(new EventRender3D());
         	}

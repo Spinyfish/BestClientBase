@@ -1,12 +1,12 @@
-package me.dev.clientbase.hackapi.hacks;
+package me.dev.clientbase.impl.module;
 
 import me.dev.clientbase.Client;
-import me.dev.clientbase.hackapi.Module;
-import me.dev.clientbase.hackapi.ModuleAction;
-import me.dev.clientbase.hackapi.event.theevents.EventMotionUpdate;
-import me.dev.clientbase.hackapi.event.theevents.EventPacket;
-import me.dev.clientbase.hackapi.event.theevents.EventRender2D;
-import me.dev.clientbase.hackapi.event.theevents.EventRender3D;
+import me.dev.clientbase.api.module.Module;
+import me.dev.clientbase.api.module.action.ModuleAction;
+import me.dev.clientbase.impl.event.EventMotionUpdate;
+import me.dev.clientbase.impl.event.EventPacket;
+import me.dev.clientbase.impl.event.EventRender2D;
+import me.dev.clientbase.impl.event.EventRender3D;
 
 public class Hud extends Module {
 
@@ -36,9 +36,10 @@ public class Hud extends Module {
 	
 	public ModuleAction<EventRender2D> render2DAction = e -> {
 		int y = 0;
-		for(Module module : Client.CLIENT.getSingleton().getModules().values()) {
+		for(Module module : Client.CLIENT.moduleManager.getElements().values()) {
 			if(module.isToggled()) {
-				mc.fontRendererObj.drawStringWithShadow(module.name, 20 + y, 10, -1);
+				mc.fontRendererObj.drawStringWithShadow(module.name, 2, 2 + y, -1);
+				y += 11;
 			}
 		}
 		

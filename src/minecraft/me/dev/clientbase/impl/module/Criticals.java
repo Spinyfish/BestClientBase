@@ -1,11 +1,11 @@
-package me.dev.clientbase.hackapi.hacks;
+package me.dev.clientbase.impl.module;
 
-import me.dev.clientbase.hackapi.Module;
-import me.dev.clientbase.hackapi.ModuleAction;
-import me.dev.clientbase.hackapi.event.theevents.EventMotionUpdate;
-import me.dev.clientbase.hackapi.event.theevents.EventPacket;
-import me.dev.clientbase.hackapi.event.theevents.EventRender2D;
-import me.dev.clientbase.hackapi.event.theevents.EventRender3D;
+import me.dev.clientbase.api.module.Module;
+import me.dev.clientbase.api.module.action.ModuleAction;
+import me.dev.clientbase.impl.event.EventMotionUpdate;
+import me.dev.clientbase.impl.event.EventPacket;
+import me.dev.clientbase.impl.event.EventRender2D;
+import me.dev.clientbase.impl.event.EventRender3D;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.network.play.client.C03PacketPlayer.C04PacketPlayerPosition;
 

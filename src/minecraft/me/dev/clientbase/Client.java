@@ -1,9 +1,10 @@
 package me.dev.clientbase;
 
-import java.util.HashMap;
-
-import me.dev.clientbase.hackapi.Module;
-import me.dev.clientbase.hackapi.ModuleManager;
+import me.dev.clientbase.api.event.EventManager;
+import me.dev.clientbase.api.module.Module;
+import me.dev.clientbase.api.module.manager.ModuleManager;
+import me.dev.clientbase.client.IClient;
+import me.dev.clientbase.client.interfaces.ClientInfo;
 
 //Sets client info
 @ClientInfo(name = "Client", author = "You")
@@ -15,61 +16,47 @@ public class Client implements IClient<Client, Module> {
 	//The client instance
 	public static Client CLIENT = new Client();
 	
-	//The client name, if this was rise it would be called "Rise"
+	//The client name, if this was wurst it would be called "Wurst"
 	public static String NAME = CLIENTINFO.name();
 	
-	//The author, if the dev was Vince from the hit intent client diablo, it would be said "Vince"
+	//The author, if this was wurst this would be "Alexander"
 	public static String AUTHOR = CLIENTINFO.author();
 	
-	//Map of modules, even tho arraylist is faster I like how u can get keys bcz its neat
-	public static HashMap<Class<? extends Module>, Module> theMapOfTheModulesThatWeUse = new HashMap<>();
+	public ModuleManager moduleManager;
+	public EventManager eventManager;
+
+	@Override
+	/**
+	 * Executes at the start of the client
+	 */
+	public void startup() {
+		
+		System.out.println(String.format("Welcome to %s by %s", this.CLIENTINFO.name(), this.CLIENTINFO.author()));
+		
+		// If you remove this i will steal your lungs
+		System.out.println("Based on https://github.com/Spinyfish/BestClientBase");
+				
+		this.eventManager = new EventManager();
+
+		this.moduleManager = new ModuleManager();
+		this.moduleManager.init();
+
+	}
 	
 	@Override
 	/**
-	 * Idk what init means but in the client src's ive seen it registers modules, maybe its short for sumn like "Initate. Nice. Inuite. Tonsils" idfk what it is tbh
+	 * Executes at the end of the client
 	 */
-	public void init() {
-		
-		ModuleManager modulem = new ModuleManager();
-		
-		theMapOfTheModulesThatWeUse.put(modulem.getCriticals().getClass(), modulem.getCriticals());
-
-		theMapOfTheModulesThatWeUse.put(modulem.getSprint().getClass(), modulem.getSprint());
-
-		theMapOfTheModulesThatWeUse.put(modulem.getHUD().getClass(), modulem.getHUD());
-		
-	}
-	
-	@Override
-	/**
-	 * Creates a new instane and gives it to u
-	 */
-	public Client getSingleton() {
-		return new Client();
+	public void end() {
+		System.out.println("Goodbye!");
 	}
 
 	@Override
 	/**
-	 * Gets the name of this the client
+	 * Gets the client info (name + author)
 	 */
-	public String name() {
-		return NAME;
+	public ClientInfo getClientInfo() {
+		return this.CLIENTINFO;
 	}
 
-	@Override
-	/**
-	 * Gets the author we set who is u
-	 */
-	public String author() {
-		return AUTHOR;
-	}
-
-	@Override
-	/**
-	 * gets a map of our modules
-	 */
-	public HashMap<Class<? extends Module>, Module> getModules() {
-		return theMapOfTheModulesThatWeUse;
-	}
-	
 }

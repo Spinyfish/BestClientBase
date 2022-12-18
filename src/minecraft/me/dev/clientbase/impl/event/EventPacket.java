@@ -1,6 +1,6 @@
-package me.dev.clientbase.hackapi.event.theevents;
+package me.dev.clientbase.impl.event;
 
-import me.dev.clientbase.hackapi.event.Event;
+import me.dev.clientbase.api.event.Event;
 import net.minecraft.network.Packet;
 
 public class EventPacket extends Event {

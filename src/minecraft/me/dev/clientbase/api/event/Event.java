@@ -1,4 +1,6 @@
-package me.dev.clientbase.hackapi.event;
+package me.dev.clientbase.api.event;
+
+import me.dev.clientbase.api.event.interfaces.IEvent;
 
 public class Event implements IEvent {
 
