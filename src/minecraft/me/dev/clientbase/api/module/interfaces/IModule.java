@@ -1,11 +1,12 @@
-package me.dev.clientbase.hackapi;
+package me.dev.clientbase.api.module.interfaces;
 
 import java.util.function.Consumer;
 
-import me.dev.clientbase.hackapi.event.theevents.EventMotionUpdate;
-import me.dev.clientbase.hackapi.event.theevents.EventPacket;
-import me.dev.clientbase.hackapi.event.theevents.EventRender2D;
-import me.dev.clientbase.hackapi.event.theevents.EventRender3D;
+import me.dev.clientbase.api.module.action.ModuleAction;
+import me.dev.clientbase.impl.event.EventMotionUpdate;
+import me.dev.clientbase.impl.event.EventPacket;
+import me.dev.clientbase.impl.event.EventRender2D;
+import me.dev.clientbase.impl.event.EventRender3D;
 import net.minecraft.client.Minecraft;
 
 public interface IModule {

@@ -1,4 +1,4 @@
-package me.dev.clientbase.hackapi;
+package me.dev.clientbase.api.module.action;
 
 public interface ModuleAction<Event> {
 

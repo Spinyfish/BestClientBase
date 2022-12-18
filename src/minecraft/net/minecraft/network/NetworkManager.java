@@ -43,7 +43,7 @@ import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import me.dev.clientbase.Client;
-import me.dev.clientbase.hackapi.event.theevents.EventPacket;
+import me.dev.clientbase.impl.event.EventPacket;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.CryptManager;
@@ -160,7 +160,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
             {
             	final EventPacket packetEvent = new EventPacket(packet);
             	
-            	for(me.dev.clientbase.hackapi.Module module : Client.theMapOfTheModulesThatWeUse.values()) {
+            	for(me.dev.clientbase.api.module.Module module :  Client.CLIENT.moduleManager.getElements().values()) {
                 	if(module.packetAction() != null && module.isToggled()) {
                 		module.packetAction().accept(packetEvent);
                 	}

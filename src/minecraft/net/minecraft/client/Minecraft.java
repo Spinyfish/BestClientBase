@@ -572,7 +572,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.effectRenderer = new EffectRenderer(this.theWorld, this.renderEngine);
         this.checkGLError("Post startup");
         
-        Client.CLIENT.getSingleton().init();
+        Client.CLIENT.startup();
         
         this.ingameGUI = new GuiIngame(this);
 
@@ -1061,6 +1061,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.stream.shutdownStream();
             logger.info("Stopping!");
 
+            Client.CLIENT.end();
+            
             try
             {
                 this.loadWorld((WorldClient)null);
@@ -1917,7 +1919,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 if (Keyboard.getEventKeyState())
                 {
                 	
-                	for(me.dev.clientbase.hackapi.Module module : Client.theMapOfTheModulesThatWeUse.values()) {
+                	for(me.dev.clientbase.api.module.Module module :  Client.CLIENT.moduleManager.getElements().values()) {
                 		if(module.keybind == k)
                 			module.toggle();
                 	}

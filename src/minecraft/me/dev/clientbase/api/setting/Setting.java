@@ -1,4 +1,4 @@
-package me.dev.clientbase.hackapi.hacks.settings;
+package me.dev.clientbase.api.setting;
 
 public class Setting {
 
