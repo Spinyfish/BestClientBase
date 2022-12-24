@@ -1,3 +1,2 @@
-# BestClientBase
- 
-This is, without doubt, the ~~worst~~ best client base EVER. If you dont know how to make a base? THIS IS FOR YOU!
+# Client Base
+A good client base to use if you are starting out.
